@@ -7,35 +7,42 @@
   */
 
   // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();
+  $mail->Host = 'smtp.mailtrap.io';
+  $mail->SMTPAuth = true;
+  $mail->Port = 2525;
+  $mail->Username = '292255af1388f9';
+  $mail->Password = '39e7f92fce48fb';
+  try {
+
+  //Recipients
+      $mail->setFrom($_POST['email'], $_POST['name']);
+      $mail->addAddress('reggiestain@gmail.com', 'Forty Nine 57');     //Add a recipient
+      //$mail->addAddress('ellen@example.com');               //Name is optional
+      //$mail->addReplyTo('info@example.com', 'Information');
+      //$mail->addCC('cc@example.com');
+      //$mail->addBCC('bcc@example.com');
+
+      //Attachments
+      //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+      //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $mail->isHTML(true);                                  //Set email format to HTML
+      $mail->Subject = $_POST['subject'];
+      $mail->Body    = $_POST['message'];
+      //$mail->AltBody =
+
+      $mail->send();
+      echo 'OK';
+  } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }
-
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
-?>

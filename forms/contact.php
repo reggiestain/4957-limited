@@ -16,11 +16,11 @@ require '../vendor/autoload.php';
 
   $mail = new PHPMailer(true);
   $mail->isSMTP();
-  $mail->Host = 'smtp.mailtrap.io';
+  $mail->Host = 'mail.4957limited.com';
   $mail->SMTPAuth = true;
-  $mail->Port = 2525;
-  $mail->Username = '292255af1388f9';
-  $mail->Password = '39e7f92fce48fb';
+  $mail->Port = 587;
+  $mail->Username = 'info@4957limited.com';
+  $mail->Password = 'REGinald19#';
   try {
 
   //Recipients

@@ -26,7 +26,7 @@ require '../vendor/autoload.php';
 
   //Recipients
       $mail->setFrom($_POST['email'], $_POST['name']);
-      $mail->addAddress('reggiestain@gmail.com', 'Forty Nine 57');     //Add a recipient
+      $mail->addAddress('taggishbeko@gmail.com', 'Forty Nine 57');     //Add a recipient
       //$mail->addAddress('ellen@example.com');               //Name is optional
       //$mail->addReplyTo('info@example.com', 'Information');
       //$mail->addCC('cc@example.com');

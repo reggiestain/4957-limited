@@ -16,11 +16,12 @@ require '../vendor/autoload.php';
 
   $mail = new PHPMailer(true);
   $mail->isSMTP();
-  $mail->Host = 'mail.4957limited.com';
+  $mail->Host = 'sxb1plzcpnl453522.prod.sxb1.secureserver.net';
   $mail->SMTPAuth = true;
-  $mail->Port = 587;
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
   $mail->Username = 'info@4957limited.com';
   $mail->Password = 'REGinald19#';
+  $mail->Port = 465;
   try {
 
   //Recipients
